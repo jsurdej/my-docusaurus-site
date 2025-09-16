@@ -3,7 +3,30 @@ backend:
   repo: jsurdej/my-docusaurus-site
   branch: main
 
-media_folder: "static/img/uploads"
-public_folder: "/img/uploads"
+media_folder: "static/img/uploads"   # files stored in repo
+public_folder: "/img/uploads"         # how they’re referenced on the site
+
 publish_mode: editorial_workflow
+
+collections:
+  - name: "docs"
+    label: "Docs"
+    folder: "docs"
+    create: true
+    extension: "md"
+    slug: "{{slug}}"
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "body", label: "Body", widget: "markdown" }
+
+  - name: "blog"
+    label: "Blog"
+    folder: "blog"
+    create: true
+    extension: "md"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "date", label: "Date", widget: "datetime" }
+      - { name: "body", label: "Body", widget: "markdown" }
 
