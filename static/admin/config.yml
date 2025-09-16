@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: YOUR-GITHUB-USER/YOUR-REPO
+  repo: jsurdej/my-docusaurus-site
   branch: main
 
 media_folder: "static/img/uploads"
