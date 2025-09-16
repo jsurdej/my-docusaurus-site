@@ -1,0 +1,54 @@
+backend:
+  name: git-gateway
+  branch: main  # Netlify will commit CMS changes to this branch
+
+site_url: "/"   # optional; real URL is fine too
+
+media_folder: "static/img/uploads"  # where uploaded files are stored in the repo
+public_folder: "/img/uploads"        # how those files are referenced in the site
+
+publish_mode: editorial_workflow     # enables Draft -> Review -> Publish (optional but useful)
+
+collections:
+  # Docusaurus Docs (/docs)
+  - name: "docs"
+    label: "Docs"
+    label_singular: "Doc"
+    folder: "docs"
+    create: true
+    slug: "{{slug}}"
+    path: "{{slug}}.md"
+    fields:
+      - { name: "id", label: "ID (optional; used by Docusaurus)", widget: "string", required: false }
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "sidebar_label", label: "Sidebar Label (optional)", widget: "string", required: false }
+      - { name: "description", label: "Description (optional)", widget: "text", required: false }
+      - { name: "body", label: "Body", widget: "markdown" }
+
+  # Docusaurus Blog (/blog)
+  - name: "blog"
+    label: "Blog"
+    folder: "blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}.md"
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "authors", label: "Authors (optional)", widget: "list", required: false, field: {label: "Author", name: "author", widget: "string"} }
+      - { name: "tags", label: "Tags (optional)", widget: "list", required: false }
+      - { name: "draft", label: "Draft?", widget: "boolean", default: false }
+      - { name: "date", label: "Date", widget: "datetime" }
+      - { name: "body", label: "Body", widget: "markdown" }
+
+  # Optional: Pages in /src/pages (Markdown only). Remove if you don’t want it.
+  - name: "pages"
+    label: "Pages"
+    folder: "src/pages"
+    create: true
+    slug: "{{slug}}"
+    path: "{{slug}}.md"
+    filter: { field: "template", value: "md-page" }
+    fields:
+      - { name: "title", label: "Title", widget: "string" }
+      - { name: "template", label: "Template", widget: "hidden", default: "md-page" }
+      - { name: "body", label: "Body", widget: "markdown" }

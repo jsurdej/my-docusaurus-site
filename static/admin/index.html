@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Content Manager</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <!-- Netlify Identity Widget (login modal) -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <!-- Netlify CMS App -->
+    <script src="https://unpkg.com/netlify-cms-app@^2.0.0/dist/netlify-cms.js"></script>
+
+    <script>
+      // Optional: After login, send editors back to the site homepage
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              window.location.href = "/";
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
